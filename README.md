@@ -16,6 +16,14 @@ This application helps users to create surveys and get users feedback for analys
 	
 	git clone https://github.com/saurabhk5/surveyshrike.git
 	cd surveyshrike
+	
+## Setting up database
+	Create schema and table using script:
+		https://github.com/saurabhk5/surveyshrike/tree/develop/scripts/postgres/create-schema-and-table.sql
+	
+	Change database setting in file:
+		https://github.com/saurabhk5/surveyshrike/tree/develop/src/main/resources/application.properties
+	
 
 ## Starting your work
 

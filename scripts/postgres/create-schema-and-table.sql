@@ -134,3 +134,11 @@ CREATE TABLE survey.survey_answers
 
 ALTER TABLE survey.survey_answers
     OWNER to postgres;
+    
+--Insert for input type
+INSERT INTO survey.survey_input_type(input_type_name) VALUES ('RadioButton');
+INSERT INTO survey.survey_input_type(input_type_name) VALUES ('CheckBox');
+INSERT INTO survey.survey_input_type(input_type_name) VALUES ('Text');
+INSERT INTO survey.survey_input_type(input_type_name) VALUES ('DropDown');
+
+COMMIT;
