@@ -1,0 +1,54 @@
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+
+# Compiled source #
+###################
+.classpath
+.project
+.springBeans
+.factorypath
+**/.settings
+**/.gradle
+bin/
+**/bin
+**/target
+**/build
+
+/.metadata/*
+*.class*.dll
+*.exe
+*.o
+*.so
+*.db
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.target
+*.zip
+*.rpm
+*.deb
+*.bin
+
+# Logs and databases #
+######################
+*.log
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thums.db
+.thumbnails
+/target/
+/.apt_generated/
