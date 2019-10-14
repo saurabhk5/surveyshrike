@@ -14,5 +14,7 @@ import com.survey.surveyshrike.entity.SurveyDetail;
 public interface SurveyDetailRepository extends JpaRepository<SurveyDetail, Long> {
 
 	List<SurveyDetail> getSurveyDetailsByUserDetailEmail(String email);
+	
+	SurveyDetail getSurveyDetailsById(int surveyId);
 
 }

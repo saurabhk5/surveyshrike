@@ -1,11 +1,10 @@
-com\survey\surveyshrike\controller\SurveyShrikeController.class
+com\survey\surveyshrike\model\Answer.class
 com\survey\surveyshrike\model\Survey.class
 com\survey\surveyshrike\model\SurveyshrikeException.class
 com\survey\surveyshrike\entity\UserDetail.class
 com\survey\surveyshrike\service\SurveyDetailsService.class
 com\survey\surveyshrike\service\UserDetailsService.class
 com\survey\surveyshrike\model\Question.class
-com\survey\surveyshrike\repository\UserDetailsRepository.class
 com\survey\surveyshrike\model\SurveyshrikeExceptionResponse.class
 com\survey\surveyshrike\model\UserInfo.class
 com\survey\surveyshrike\entity\SurveyQuestion.class
@@ -16,7 +15,6 @@ com\survey\surveyshrike\entity\SurveyDetail.class
 com\survey\surveyshrike\entity\SurveyInputType.class
 com\survey\surveyshrike\entity\SurveyQuestionOption.class
 com\survey\surveyshrike\service\impl\SurveyDetailsServiceImpl.class
-com\survey\surveyshrike\service\impl\UserDetailsServiceImpl.class
 com\survey\surveyshrike\SpringBootSurveyShrikeApplication.class
 com\survey\surveyshrike\entity\SurveyAnswer.class
 com\survey\surveyshrike\SwaggerConfig.class

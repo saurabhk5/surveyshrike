@@ -9,6 +9,8 @@ public class Question {
 	private int inputType;
 
 	private boolean answerRequired;
+	
+	private int questionId;
 
 	private List<QuestionOption> questionOption;
 
@@ -42,6 +44,14 @@ public class Question {
 
 	public void setQuestionOption(List<QuestionOption> questionOption) {
 		this.questionOption = questionOption;
+	}
+
+	public int getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
 
 }

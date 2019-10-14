@@ -10,13 +10,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.survey.surveyshrike.entity.SurveyAnswer;
 import com.survey.surveyshrike.entity.SurveyDetail;
 import com.survey.surveyshrike.entity.SurveyQuestion;
 import com.survey.surveyshrike.entity.SurveyQuestionOption;
 import com.survey.surveyshrike.entity.UserDetail;
+import com.survey.surveyshrike.model.Answer;
 import com.survey.surveyshrike.model.Question;
+import com.survey.surveyshrike.model.QuestionAnswered;
 import com.survey.surveyshrike.model.QuestionOption;
 import com.survey.surveyshrike.model.Survey;
+import com.survey.surveyshrike.repository.SurveyAnswerRepository;
 import com.survey.surveyshrike.repository.SurveyDetailRepository;
 import com.survey.surveyshrike.service.SurveyDetailsService;
 import com.survey.surveyshrike.service.UserDetailsService;
@@ -25,10 +29,10 @@ import com.survey.surveyshrike.service.UserDetailsService;
 public class SurveyDetailsServiceImpl implements SurveyDetailsService {
 
 	@Autowired
-	SurveyDetailRepository surveyDetailRepository;
+	private SurveyDetailRepository surveyDetailRepository;
 
 	@Autowired
-	UserDetailsService userService;
+	private SurveyAnswerRepository surveyAnswerRepository;
 
 	@Override
 	public List<Survey> getAllSurveys() {
@@ -92,12 +96,69 @@ public class SurveyDetailsServiceImpl implements SurveyDetailsService {
 		return surveyList;
 	}
 
+	@Override
+	public SurveyDetail getSurveyById(int surveyId) {
+		SurveyDetail surveyDetailsById = surveyDetailRepository
+				.getSurveyDetailsById(surveyId);
+
+		return surveyDetailsById;
+	}
+
+	@Override
+	public void createSurveyAnswer(Answer surveyAnswer, UserDetail userDetail) {
+
+		SurveyAnswer surveyAns = new SurveyAnswer();
+		int userId = userDetail.getId();
+		for (QuestionAnswered questionAnswered : surveyAnswer.getQuestionsAnswered()) {
+			surveyAns.setAnsweredBy(userId);
+			surveyAns.setQuestionId(questionAnswered.getQuestionId());
+			surveyAns.setOptionId(questionAnswered.getOptionId());
+			surveyAns.setAnswerText(questionAnswered.getAnswerText());
+			surveyAns.setIsanswered(questionAnswered.isAnswered());
+			surveyAnswerRepository.save(surveyAns);
+		}
+	}
+
+	@Override
+	public Answer getSurveyAnswerBySurveyIdAndEmail(SurveyDetail surveyById,
+			UserDetail userDetails) {
+
+		Answer answer = new Answer();
+
+		answer.setSurveyId(surveyById.getId());
+		answer.setEmail(userDetails.getEmail());
+
+		List<QuestionAnswered> questionAnswered = new ArrayList<>();
+
+		for (SurveyQuestion surveyQuestion : surveyById.getSurveyQuestions()) {
+
+			SurveyAnswer surveyAnswerByQuestionId = surveyAnswerRepository
+					.getSurveyAnswerByQuestionIdAndAnsweredBy(surveyQuestion.getId(),
+							userDetails.getId());
+
+			QuestionAnswered ques = new QuestionAnswered();
+			ques.setQuestion(surveyAnswerByQuestionId.getSurveyQuestion().getQuestion());
+			ques.setQuestionId(surveyAnswerByQuestionId.getQuestionId());
+			ques.setAnswerText(surveyAnswerByQuestionId.getAnswerText());
+			ques.setAnswered(surveyAnswerByQuestionId.getIsanswered());
+			ques.setOptionId(surveyAnswerByQuestionId.getOptionId());
+			ques.setOptionName(surveyAnswerByQuestionId.getSurveyQuestionOption().getOptionChoiceName());
+
+			questionAnswered.add(ques);
+		}
+
+		answer.setQuestionsAnswered(questionAnswered);
+
+		return answer;
+	}
+
 	private List<Survey> generateResponse(List<SurveyDetail> allSurvey) {
 		List<Survey> surveyList = new ArrayList<>();
 
 		for (SurveyDetail surveyDetail : allSurvey) {
 
 			Survey survey = new Survey();
+			survey.setSurveyId(surveyDetail.getId());
 			survey.setName(surveyDetail.getName());
 			survey.setDescription(surveyDetail.getDescription());
 			survey.setStartDate(surveyDetail.getStartDate());
@@ -108,6 +169,7 @@ public class SurveyDetailsServiceImpl implements SurveyDetailsService {
 
 			for (SurveyQuestion surveyQuestion : surveyDetail.getSurveyQuestions()) {
 				Question question = new Question();
+				question.setQuestionId(surveyQuestion.getId());
 				question.setQuestion(surveyQuestion.getQuestion());
 				question.setInputType(surveyQuestion.getInputType());
 				question.setAnswerRequired(surveyQuestion.getAnswerRequired());
@@ -119,6 +181,7 @@ public class SurveyDetailsServiceImpl implements SurveyDetailsService {
 					QuestionOption questionOption = new QuestionOption();
 					questionOption.setOptionChoiceName(
 							surveyQuestionOption.getOptionChoiceName());
+					questionOption.setOptionId(surveyQuestionOption.getId());
 					questionOptionsList.add(questionOption);
 				}
 				question.setQuestionOption(questionOptionsList);

@@ -18,6 +18,7 @@ public class Survey {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	private String email;
+	private int surveyId;
 
 	private List<Question> question;
 
@@ -67,6 +68,14 @@ public class Survey {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getSurveyId() {
+		return surveyId;
+	}
+
+	public void setSurveyId(int surveyId) {
+		this.surveyId = surveyId;
 	}
 
 }
