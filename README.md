@@ -2,6 +2,8 @@
 
 This application helps users to create surveys and get users feedback for analysis purposes.
 
+![alt-text](https://github.com/saurabhk5/surveyshrike/documents/surveyshrike-architure-diagram.JPG)
+
 ### Prerequisites
 
 	Git
