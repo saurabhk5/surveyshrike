@@ -36,7 +36,7 @@ public class SurveyShrikeController {
 	@PostMapping(path = "/addUserInfo", consumes = "application/json")
 	public String addUserDetails(@RequestBody UserInfo userInfo) throws Exception {
 
-		if (null != userDetailsService.findUserByEmail(userInfo.getEmail())) {
+		if (null == userDetailsService.findUserByEmail(userInfo.getEmail())) {
 			userDetailsService.createUser(userInfo);
 		}
 		else {
