@@ -2,7 +2,7 @@
 
 This application helps users to create surveys and get users feedback for analysis purposes.
 
-![alt-text](https://github.com/saurabhk5/surveyshrike/tree/develop/documents/surveyshrike-architure-diagram.JPG)
+![alt-text](https://github.com/saurabhk5/surveyshrike/blob/develop/documents/surveyshrike-architure-diagram.JPG)
 
 ### Prerequisites
 
@@ -18,6 +18,9 @@ This application helps users to create surveys and get users feedback for analys
 	cd surveyshrike
 	
 ## Setting up database
+
+![alt-text](https://github.com/saurabhk5/surveyshrike/blob/develop/documents/surveyshrike-er-diagram.JPG)
+
 	Create schema and table using script:
 		https://github.com/saurabhk5/surveyshrike/tree/develop/scripts/postgres/create-schema-and-table.sql
 	
